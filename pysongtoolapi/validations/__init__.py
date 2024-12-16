@@ -1,0 +1,1 @@
+from validations.get_scale import get_scale_validation
