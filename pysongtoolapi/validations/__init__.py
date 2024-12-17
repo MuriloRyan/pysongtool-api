@@ -1,2 +1,2 @@
 from validations.get_scale import get_scale_validation
-from validations.note_is_valid import note_validation
+from validations.note_validation import note_validation
