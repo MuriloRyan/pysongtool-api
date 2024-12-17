@@ -9,7 +9,6 @@ from pysongtool.exceptions.UnknownScale import WrongScale
 from pysongtool.exceptions.WrongNote import WrongNote
 
 import validations
-import validations.get_scale
 
 app = FastAPI()
 tool = PySongTool()
@@ -28,3 +27,12 @@ def get_scale(note: str, scale: str):
         return validation
 
     return tool.scale(note, scale)
+
+@app.get('/all_chords/')
+def all_chords(note: str):
+    validation = validations.note_validation(note)
+
+    if validation['is_valid'] == False:
+        return validation
+
+    return tool.all_chords(note)
