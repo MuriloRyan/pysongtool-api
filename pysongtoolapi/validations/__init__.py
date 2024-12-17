@@ -1,2 +1,4 @@
 from validations.get_scale import get_scale_validation
+from validations.get_chord import get_chord_validation
+
 from validations.note_validation import note_validation

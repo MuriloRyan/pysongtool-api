@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pysongtool.pysongtool import PySongTool
 
 from pysongtool.data.scales import scales_list
+from pysongtool.data.chords import chord_list
 
 from pysongtool.exceptions.UnknownChord import UnknownChord
 from pysongtool.exceptions.UnknownScale import WrongScale
@@ -15,9 +16,7 @@ tool = PySongTool()
 
 @app.get('/')
 def index():
-    return {
-        'message': 'Hello, take a look at /docs and try all api endpoints!'
-    }
+    return {'message': 'Hello, World!'}
 
 @app.get('/get_scale/')
 def get_scale(note: str, scale: str):
@@ -27,6 +26,15 @@ def get_scale(note: str, scale: str):
         return validation
 
     return tool.scale(note, scale)
+
+@app.get('/get_chord')
+def get_chord(note: str, chord: str):
+    validation = validations.get_chord_validation(note, chord, chord_list)
+
+    if validation['is_valid'] == False:
+        return validation
+    
+    return tool.chord(note, chord)
 
 @app.get('/all_chords/')
 def all_chords(note: str):
